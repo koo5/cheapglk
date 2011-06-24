@@ -307,6 +307,10 @@ static gidispatch_function_t function_table[] = {
     { 0x016E, glk_date_to_simple_time_utc, "date_to_simple_time_utc" },
     { 0x016F, glk_date_to_simple_time_local, "date_to_simple_time_local" },
 #endif /* GLK_MODULE_DATETIME */
+#ifdef GLK_MODULE_LEMON
+    { 0x1300, glk_make_sdl_window, "make_sdl_window" },
+#endif /* GLK_MODULE_LEMON */
+
 };
 
 glui32 gidispatch_count_classes()
@@ -631,7 +635,10 @@ char *gidispatch_prototype(glui32 funcnum)
         case 0x016F: /* date_to_simple_time_local */
             return "3>+[8IsIsIsIsIsIsIsIs]Iu:Is";
 #endif /* GLK_MODULE_DATETIME */
-
+#ifdef GLK_MODULE_LEMON
+        case 0x1300: /* glk_make_sdl_window */
+            return "0:";
+#endif /* GLK_MODULE_LEMON */
         default:
             return NULL;
     }
@@ -1424,7 +1431,12 @@ void gidispatch_call(glui32 funcnum, glui32 numargs, gluniversal_t *arglist)
             }
             break;
 #endif /* GLK_MODULE_DATETIME */
-
+#ifdef GLK_MODULE_LEMON
+	case 0x1300: /* make_sdl_window */ {
+	    glk_make_sdl_window();
+	    }
+	    break;
+#endif /* GLK_MODULE_LEMON */
         default:
             /* do nothing */
             break;
