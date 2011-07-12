@@ -17,7 +17,7 @@ CC = cc
 
 OPTIONS = -g -Wall
 
-CFLAGS = $(OPTIONS) $(INCLUDEDIRS)
+CFLAGS = $(OPTIONS) $(INCLUDEDIRS) `sdl-config --libs --cflags`
 
 GLKLIB = libcheapglk.a
 
